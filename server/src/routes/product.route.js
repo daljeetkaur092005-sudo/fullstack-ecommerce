@@ -1,7 +1,7 @@
 import express from "express"
 import { productValidator } from "../validator/product.validator.js";
 import { authenticate, authenticateSeller } from "../middleware/auth.middleware.js";
-import { createProduct} from "../controller/product.controller.js";
+import { createProduct, deleteController, updateConroller} from "../controller/product.controller.js";
 import multer from "multer"
 
 const upload=multer({
@@ -23,4 +23,16 @@ router.post("/",authenticate,authenticateSeller,upload.array("images"),
 },
 
 productValidator,createProduct)
+
+router.delete("/:id",deleteController)
+router.put("/:id",updateConroller)
+
+
+
+
+
+
+
+
+
 export default router;

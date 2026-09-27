@@ -5,7 +5,7 @@ export const registerController = async (req, res) => {
   const { email, password, name } = req.body;
   const isExist = await authModel.findOne({ email });
   if (isExist) {
-    return res.status(400).json({
+    return res.status(409).json({
       message: "user already exist",
       errors: [
         {
@@ -15,6 +15,34 @@ export const registerController = async (req, res) => {
       ],
     });
   }
+
+ const passwordExist = await authModel.findOne({ password });
+  if (!passwordExist) {
+    return res.status(404).json({
+      message: "user not found",
+      errors: [
+        {
+          field: "password",
+          message: "password is already password",
+        },
+      ],
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const user = await authModel.create({
     email,
     passwordHash: await bcrypt.hash(password, 10),
@@ -142,3 +170,38 @@ export const refreshController = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+export const logoutController=async(req,res)=>{
+   try{
+   const refreshToken=req.cookies.refreshToken
+      if(!refreshToken){
+        return res.status(401).json({
+          message:"refresh token is not found"
+        })
+      }
+    const user=await authModel.findOneAndUpdate({refreshToken},{
+      $unset:{refreshToken:1}
+    })
+
+
+    res.clearCookie("refreshToken")
+   return  res.status(200).json({
+    message:"user logout successfully"
+   })
+   }
+   catch(error){
+
+       return res.status(500).json({
+      message: error.message
+    });
+   }
+
+   
+
+
+
+}

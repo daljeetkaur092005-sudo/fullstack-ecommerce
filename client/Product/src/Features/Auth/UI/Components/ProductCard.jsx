@@ -1,13 +1,16 @@
 
 import React from "react";
+import { useContext } from "react";
+import { MyStore } from "../../State/useContext";
 
 const ProductCard = () => {
+  const{ productData}=useContext(MyStore)
   return (
     <div className="min-h-screen bg-[#050611] px-5 py-10 text-white">
       <div className="mx-auto max-w-7xl">
 
-        {/* Heading */}
-        <div className="mb-10">
+   
+                 <div className="mb-10">
           <p className="mb-2 text-sm uppercase tracking-[4px] text-cyan-400">
             Products
           </p>
@@ -25,6 +28,9 @@ const ProductCard = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
           {/* Card 1 */}
+           {
+          productData?.map((product)=>{
+            return (
           <div
             className="
               group overflow-hidden rounded-2xl
@@ -36,7 +42,7 @@ const ProductCard = () => {
               hover:border-purple-500/40
             "
           >
-
+    
             {/* Image */}
             <div className="h-52 overflow-hidden bg-white/5">
               <img
@@ -54,20 +60,20 @@ const ProductCard = () => {
             <div className="p-5">
 
               <h2 className="text-xl font-bold">
-                Premium T-Shirt
+                {product.title}
               </h2>
 
               <p className="mt-2 line-clamp-2 text-sm leading-6 text-gray-400">
-                Comfortable premium cotton t-shirt for everyday wear.
+           {product.description}
               </p>
 
               <div className="mt-5 flex items-center justify-between">
                 <span className="text-2xl font-bold text-cyan-400">
-                  ₹799
+                  {product.price.currency}{product.price.amount}
                 </span>
 
                 <span className="rounded-lg bg-purple-500/10 px-3 py-1 text-xs text-purple-300">
-                  M / L / XL
+                {product.sizes}
                 </span>
               </div>
 
@@ -126,7 +132,24 @@ const ProductCard = () => {
             </div>
           </div>
 
-        </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+            )
+          })
+        }
+          </div>
       </div>
     </div>
   );

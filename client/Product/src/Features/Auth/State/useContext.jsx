@@ -6,6 +6,7 @@ export const MyContextProvider=({children})=>{
     const [user,setUser]=useState()
     const [loading,setLoading]=useState()
          const [productData, setProductData] = useState();
+         console.log("pro",productData)
 const [accessToken,setAccessToken]=useState(localStorage.getItem("accessToken"))
 const getMe=async(token)=>{
     console.log("i am running")

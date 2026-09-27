@@ -13,27 +13,27 @@ const ProductPage = () => {
     handleSubmit,
   } = useForm();
 
-  // ================= DELETE PRODUCT =================
+
   const deleteProduct = async (id) => {
     const res = await axios.get(`http://localhost:5173${id}`);
 
     return res.data;
   };
 
-  // ================= CREATE PRODUCT =================
+
   const createProduct = async (data) => {
     console.log("FORM DATA:", data);
 
     try {
       const formData = new FormData();
 
-      formData.append("title", data.title);
-      formData.append("description", data.description);
+      formData.append("title", data.title)
+      formData.append("description", data.description)
 
-      formData.append("price.amount", data.price.amount);
-      formData.append("price.currency", data.price.currency);
+      formData.append("price.amount", data.price.amount)
+      formData.append("price.currency", data.price.currency)
 
-      formData.append("sizes", data.sizes);
+      formData.append("sizes", data.sizes)
 
       formData.append("images", data.images[0]);
 
@@ -43,12 +43,12 @@ const ProductPage = () => {
 
       setProductData(res.data);
     } catch (error) {
-      console.log("ERROR:", error.response?.data);
+       console.log(error)
     }
   };
 
   return (
-    // ================= MAIN PAGE =================
+    
     <div className="min-h-screen bg-[#050611] px-5 py-10 text-white">
 
       {/* ================= CONTAINER ================= */}

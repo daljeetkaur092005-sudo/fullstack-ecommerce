@@ -33,7 +33,7 @@ export const createProduct = async (req, res) => {
 
 
 
-const deleteController=async(req,res)=>{
+export const deleteController=async(req,res)=>{
      const product=await productModel.findByIdAndDelete(req.params.id)
      if(!product){
       return res.status(404).json({
@@ -47,7 +47,7 @@ const deleteController=async(req,res)=>{
 
 
 
-const updateConroller=async(req,res)=>{
+export const updateConroller=async(req,res)=>{
   const product=await productModel.findByIdAndUpdate(
     req.params.id,
   req.body,
@@ -95,7 +95,6 @@ const listAllProducts = async (req, res) => {
       message: "product not found",
     });
   }
-
   return res.status(200).json({
     message: "product get successfully",
     data: {

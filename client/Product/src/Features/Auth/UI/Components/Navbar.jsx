@@ -1,7 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router";
-
+import axios from "axios"
+import { useState } from "react";
 const Navbar = () => {
+  const [log,setLog]=useState()
+  const logout=async()=>{
+     let res=await axios.post("/auth/logout", {}, {
+  withCredentials: true
+});
+setLog(res.data)
+
+return res.data
+  }
+  
   return (
     <nav className="border-b border-white/10 bg-[#080812] px-6 py-4 text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -40,7 +51,13 @@ const Navbar = () => {
           >
             Product
           </NavLink>
-
+         <div   className={({ isActive }) =>
+              `rounded-xl px-5 py-2.5 text-sm font-medium transition ${
+                isActive
+                  ? "bg-gradient-to-r from-purple-600 to-cyan-400 text-white"
+                  : "text-gray-400 hover:bg-white/5 hover:text-white"
+              }`
+            }>LogOut</div>
         </div>
 
       </div>
