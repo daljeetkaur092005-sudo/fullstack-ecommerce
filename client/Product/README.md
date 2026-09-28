@@ -53,7 +53,31 @@ step-8 this logincontrller i use in /login route in routes folder
 
 
  creaion of currentusercontroller 
+ step-1 check th user accesstoken and which contain userid and role
+ step-2 on that bases we check in database if user found i send the res of user detail
+ creation of refreshcontroller
 
+step 1  from req.cookies get the refreshToken
+
+step-2 check the refreshToken agar refreshToken nahi milta hai then give the error with status 401 and with message unauthorized and return the res
+
+step-3 verifyRefreshToken() ka use karke refreshToken ko verify karte hain aur usme se userId aur role get karte hain
+
+step-4 userId ke basis par database mein user ko find karte hain
+
+step-5 database mein jo refreshToken store hai usko cookie se aaye refreshToken ke saath compare karte hain
+
+step-6 agar database ka refreshToken aur cookie ka refreshToken match nahi karta hai then database se refreshToken ko remove kar dete hain aur 401 status ke saath invalid refresh token ka message send karte hain
+
+step-7 agar refreshToken valid hai then generateToken() ka use karke new accessToken aur new  refreshToken generate karte hain
+
+step-8 new refreshToken ko cookies mein save karte hain aur new accessToken ko response mein send karte hain
+
+step-9 response mein status 200 send karte hain jisme message refresh token created successfully aur new accessToken send karte hain
+
+step-10 agar refreshToken verify karte time koi error aata hai then 401 status ke saath unauthorized user or invalid user` ka message send karte hain
+
+step-11 is refreshTokenController ko /refresh route mein use karte hain in routes folder
 
 
 

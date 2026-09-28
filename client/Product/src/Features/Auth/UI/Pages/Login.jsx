@@ -13,7 +13,13 @@ const Login = () => {
 const {setAccessToken,getMe}=useContext(MyStore)
 const loginSubmit = async (data) => {
   try {
-    const res = await axios.post("/api/auth/login", data);
+   const res = await axios.post(
+  "/api/auth/login",
+  data,
+  {
+    withCredentials: true,
+  }
+);
 let token=res.data.data.accessToken
       localStorage.setItem("accessToken",token)
       setAccessToken(token)

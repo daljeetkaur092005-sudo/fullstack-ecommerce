@@ -13,7 +13,7 @@ const upload=multer({
 })
 
 
-const router=express()
+const router=express.Router()
 router.post("/",authenticate,authenticateSeller,upload.array("images"),
 
 (req,res,next)=>{

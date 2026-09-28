@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 const ProductPage = () => {
   const { productData, setProductData } = useContext(MyStore);
-
+   console.log(productData)
   console.log(productData);
 
   const {
@@ -36,12 +36,16 @@ const ProductPage = () => {
       formData.append("sizes", data.sizes)
 
       formData.append("images", data.images[0]);
-
-      const res = await axios.post("/api/products", formData);
+    const response = await axios.post("/api/products",
+     formData,
+  {
+    withCredentials: true
+  }
+);
 
       console.log("res", res.data);
 
-      setProductData(res.data);
+      setProductData([...productData,res.data]);
     } catch (error) {
        console.log(error)
     }

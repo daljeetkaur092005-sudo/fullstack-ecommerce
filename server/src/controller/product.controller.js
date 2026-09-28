@@ -3,10 +3,10 @@ import productModel from "../models/product.model.js";
 
 export const createProduct = async (req, res) => {
   const filesUrls = [];
-  for (i = 0; i < req.files.length; i++) {
+  for (let i = 0; i < req.files.length; i++) {
     const response = await uploadFile({
       buffer: req.files[i].buffer,
-      fileName: req.files[i].fileName,
+      fileName: req.files[i].originalname,
     });
 
     filesUrls.push(response.url);

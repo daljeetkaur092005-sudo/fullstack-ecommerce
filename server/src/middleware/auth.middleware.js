@@ -15,10 +15,11 @@ export const authenticate=async(req,res,next)=>{
     }
 }
 
-export const authenticateSeller=()=>{
+export const authenticateSeller=(res,req,next)=>{
     if(req.user.role!="seller"){
         return res.status(403).json({
          messsgae:"user is not authorized to perform this action"
         })
     }
+    next();
 }
